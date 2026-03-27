@@ -1,0 +1,26 @@
+name = "echo-report-generator"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "echo-prime-storage"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "echo-report-generator"
+database_id = "9505f34e-dcf6-4c77-9483-a6d5775456e7"
+
+[observability]
+enabled = true
+
+[[services]]
+binding = "ENGINE_RUNTIME"
+service = "echo-engine-runtime"
+
+[[services]]
+binding = "SHARED_BRAIN"
+service = "echo-shared-brain"
