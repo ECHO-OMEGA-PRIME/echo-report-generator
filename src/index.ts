@@ -153,6 +153,8 @@ async function ensureSchema(db: D1Database) {
 // HEALTH
 // ═══════════════════════════════════════════════
 
+app.get("/", (c) => c.json({ service: 'echo-report-generator', status: 'operational' }));
+
 app.get('/health', async (c) => {
   let dbOk = false;
   try { await c.env.DB.prepare('SELECT 1').first(); dbOk = true; } catch {}
