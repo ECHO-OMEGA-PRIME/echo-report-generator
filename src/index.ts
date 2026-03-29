@@ -20,6 +20,8 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 
+const ALLOWED_ORIGINS = ['https://echo-ept.com','https://www.echo-ept.com','https://echo-op.com','https://profinishusa.com','https://bgat.echo-op.com'];
+
 // ═══════════════════════════════════════════════
 // TYPES
 // ═══════════════════════════════════════════════
@@ -119,7 +121,7 @@ interface ReportRequest {
 // ═══════════════════════════════════════════════
 
 const app = new Hono<{ Bindings: Env }>();
-app.use('*', cors({ origin: '*', allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'], allowHeaders: ['Content-Type', 'X-Echo-API-Key', 'Authorization'] }));
+app.use('*', cors({ origin: (o) => ALLOWED_ORIGINS.includes(o) ? o : ALLOWED_ORIGINS[0], allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'], allowHeaders: ['Content-Type', 'X-Echo-API-Key', 'Authorization'] }));
 // Security headers middleware
 app.use('*', async (c, next) => {
   await next();
